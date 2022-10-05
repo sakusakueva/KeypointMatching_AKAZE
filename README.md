@@ -1,2 +1,4 @@
-# KeypointMatching_AKAZE
-Keypoint-matching ( AKAZE method) using OpenCV library
+# キーポイントマッチング（AKAZE）のサンプルプログラム
+OpenCVライブラリを使用してAKAZEを実行します．<br>
+後処理として，検出した位置を検出することができます．<br>
+
