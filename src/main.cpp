@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
     /*=================================================================*/
     cv::CommandLineParser parser(argc, argv,
         "{ @tmp | data/template.png | Template image.}"
-        "{ @input | data/img_0.png | Input image.}"
+        "{ @input | data/data0.png | Input image.}"
         "{ best_match_size || Number of good response points.}"
         "{ use_color ||}"
         "{ use_project || Drawing a projective transformed template image.}"
@@ -49,12 +49,12 @@ int main(int argc, char *argv[]){
     use_inlier = parser.has("use_inlier");
 
     /*=================================================================*/
-    cv::Mat img_tmp = cv::imread(parser.get<cv::String>("@tmp"), use_color);
+    cv::Mat img_tmp = imread(parser.get<cv::String>("@tmp"), use_color);
     if (img_tmp.empty()){
         std::cout << "Image " << parser.get<cv::String>("@tmp") << " is empty or cannot be found\n";
         return 0;
     }
-    cv::Mat img_in = cv::imread(parser.get<cv::String>("@input"), use_color);
+    cv::Mat img_in = imread(parser.get<cv::String>("@input"), use_color);
     if (img_in.empty()){
         std::cout << "Image " << parser.get<cv::String>("@input") << " is empty or cannot be found\n";
         return 0;
@@ -139,9 +139,9 @@ int main(int argc, char *argv[]){
 
 
 static void help(){
-    std::cout << "\n This program demonstrates how to detect compute and match ORB BRISK and AKAZE descriptors \n"
+    std::cout << "\n This program demonstrates how to detect compute and match AKAZE descriptors \n"
         "Usage: \n"
-        "  ./matchmethod_orb_akaze_brisk --image1=<image1(../data/basketball1.png as default)> --image2=<image2(../data/basketball2.png as default)>\n"
+        "  ./keypoint_matching --tmp data/choco/template.png --input data/choco/data0.png --best_match_size=50 --use_color --use_rect --time\n"
         "Press a key when image window is active to change algorithm or descriptor\n";
 }
 
