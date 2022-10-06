@@ -27,12 +27,12 @@ int main(int argc, char *argv[]){
     cv::CommandLineParser parser(argc, argv,
         "{ @tmp | data/template.png | Template image.}"
         "{ @input | data/img_0.png | Input image.}"
-        "{ best_match_size | | Number of good response points.}"
-        "{ use_color | |}"
-        "{ use_project | | Drawing a projective transformed template image.}"
-        "{ use_rect | | Drawing a rectangular transformed template image.}"
-        "{ use_all | | Drawing corresponding points with small distances.}"
-        "{ use_inlier | | Drawing only inliers.}"
+        "{ best_match_size || Number of good response points.}"
+        "{ use_color ||}"
+        "{ use_project || Drawing a projective transformed template image.}"
+        "{ use_rect || Drawing a rectangular transformed template image.}"
+        "{ use_all || Drawing corresponding points with small distances.}"
+        "{ use_inlier || Drawing only inliers.}"
         "{ time t || To measure processing time.}"
         "{ help h ||}");
 
