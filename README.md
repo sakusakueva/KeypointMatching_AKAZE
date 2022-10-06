@@ -4,7 +4,7 @@ OpenCVライブラリを使用してAKAZEを実行します．<br>
 
 ## 動作確認済みの環境
 OS：`Ubuntu 20.04`<br>
-OpenCV：`4.`
+OpenCV：`3.4.3`
 
 ## コンパイル
 `KeypointMatching_AKAZE`直下で以下のコマンドを実行する．<br>
