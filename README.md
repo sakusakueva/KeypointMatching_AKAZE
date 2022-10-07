@@ -41,7 +41,7 @@ $ ./keypoint_matching -tmp data/choco/template.png -input data/choco/data0.png -
 キーポイント検出後，特徴量の類似度をもとにキーポイントをソートし，上位`best_match_size`個のキーポイントを使ってRANSACを使ってホモグラフィ行列を算出します．<br>
 ホモグラフィ行列を使って射影変換し対象物の位置を求めます．<br>
 
-なお，正解位置が分かる場合は，`JudgeSuccess`関数から，検出成功か判定することができます．<br>
+なお，正解位置が分かる場合は，`JudgeSuccess()`関数から，検出成功か判定することができます．<br>
 
 ### 実行結果の描画
 #### (1) 検出結果を射影変換で描画する（`--use_project`）
