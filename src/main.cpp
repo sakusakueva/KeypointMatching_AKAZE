@@ -5,8 +5,8 @@
 
 static void help();
 void CornerSort( std::vector<cv::Point2f> &corners, cv::Size img_in_size);
-cv::Mat DrawLines(const cv::Mat img, std::vector<cv::Point2f> corners, bool use_color);
 bool JudgeSuccess(const std::pair<int, int> &pred, const std::pair<int, int> &GT, const int eps);
+cv::Mat DrawLines(const cv::Mat img, std::vector<cv::Point2f> corners, bool use_color);
 std::vector<cv::Point2f> CornerTrans(cv::Size img_tmp_size, cv::Mat h);
 void OutputProjectionTrans(const cv::Mat img_tmp, const cv::Mat img_in, cv::Mat h, bool use_color);
 void OutputRect(std::vector<cv::Point2f> dst_corners, cv::Size img_tmp_size, cv::Mat img_in, bool use_color);
@@ -204,6 +204,22 @@ void OutputProjectionTrans(const cv::Mat img_tmp, const cv::Mat img_in, cv::Mat 
     cv::warpPerspective(tmp, result, h, img_in.size(), 1, cv::BORDER_TRANSPARENT);
     cv::imshow("result_warp", result);
     return;
+}
+
+cv::Mat DrawLines(const cv::Mat img, std::vector<cv::Point2f> corners, bool use_color){
+    cv::Mat img_dst = img.clone();
+    if(use_color){
+        cv::line(img_dst, corners[0], corners[1], cv::Scalar(255, 255, 0), 4);
+        cv::line(img_dst, corners[1], corners[2], cv::Scalar(255, 255, 0), 4);
+        cv::line(img_dst, corners[2], corners[3], cv::Scalar(255, 255, 0), 4);
+        cv::line(img_dst, corners[3], corners[0], cv::Scalar(255, 255, 0), 4);        
+    }else{
+        cv::line(img_dst, corners[0], corners[1], cv::Scalar(128), 4);
+        cv::line(img_dst, corners[1], corners[2], cv::Scalar(128), 4);
+        cv::line(img_dst, corners[2], corners[3], cv::Scalar(128), 4);
+        cv::line(img_dst, corners[3], corners[0], cv::Scalar(128), 4);        
+    }
+    return img_dst;
 }
 
 void OutputRect(std::vector<cv::Point2f> dst_corners, cv::Size img_tmp_size, cv::Mat img_in, bool use_color){
