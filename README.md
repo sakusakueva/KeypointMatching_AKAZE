@@ -3,7 +3,7 @@ OpenCVライブラリを使用してAKAZEを実行します．<br>
 後処理として，検出した位置を検出することができます．<br>
 
 ## 動作確認済みの環境
-OS：`Ubuntu 20.04``Mac Monterey`<br>
+OS：`Ubuntu 20.04` `Mac Monterey`<br>
 OpenCV：`3.4.3`
 
 ## 事前準備
