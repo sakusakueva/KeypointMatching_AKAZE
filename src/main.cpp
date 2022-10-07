@@ -26,13 +26,13 @@ int main(int argc, char *argv[]){
     /*=================================================================*/
     cv::CommandLineParser parser(argc, argv,
         "{ @tmp | data/template.png | Template image.}"
-        "{ @input | data/data0.png | Input image.}"
-        "{ best_match_size || Number of good response points.}"
-        "{ use_color ||}"
-        "{ use_project || Drawing a projective transformed template image.}"
-        "{ use_rect || Drawing a rectangular transformed template image.}"
-        "{ use_all || Drawing corresponding points with small distances.}"
-        "{ use_inlier || Drawing only inliers.}"
+        "{ @input | data/img_0.png | Input image.}"
+        "{ best_match_size | | Number of good response points.}"
+        "{ use_color | |}"
+        "{ use_project | | Drawing a projective transformed template image.}"
+        "{ use_rect | | Drawing a rectangular transformed template image.}"
+        "{ use_all | | Drawing corresponding points with small distances.}"
+        "{ use_inlier | | Drawing only inliers.}"
         "{ time t || To measure processing time.}"
         "{ help h ||}");
 
@@ -99,14 +99,6 @@ int main(int argc, char *argv[]){
     std::vector<cv::DMatch> bestMatches;
     for (int i = 0; i < best_match_size; i++)  bestMatches.push_back(matches[index.at<int>(i, 0)]);
     
-    std::vector<cv::KeyPoint> bestMatches_tmp, bestMatches_in;
-    std::vector<cv::Point2f> bestPoint_tmp, bestPoint_in;
-    for(int i = 0; i < best_match_size; i++){
-        bestMatches_tmp.push_back(keyImg_tmp[bestMatches.at(i).queryIdx]);
-        bestMatches_in.push_back(keyImg_in[bestMatches.at(i).trainIdx]);
-    }
-
-
     /*=================================================================*/
     if(use_time_stamp){
 		end = std::chrono::system_clock::now();
@@ -115,6 +107,12 @@ int main(int argc, char *argv[]){
     }
     /*=================================================================*/
     if(use_project || use_rect){
+        std::vector<cv::KeyPoint> bestMatches_tmp, bestMatches_in;
+        std::vector<cv::Point2f> bestPoint_tmp, bestPoint_in;
+        for(int i = 0; i < best_match_size; i++){
+            bestMatches_tmp.push_back(keyImg_tmp[bestMatches.at(i).queryIdx]);
+            bestMatches_in.push_back(keyImg_in[bestMatches.at(i).trainIdx]);
+        }
         cv::KeyPoint::convert(bestMatches_tmp, bestPoint_tmp);
         cv::KeyPoint::convert(bestMatches_in, bestPoint_in);
         cv::Mat mask;
@@ -139,9 +137,9 @@ int main(int argc, char *argv[]){
 
 
 static void help(){
-    std::cout << "\n This program demonstrates how to detect compute and match AKAZE descriptors \n"
+    std::cout << "\n This program demonstrates how to detect compute and match ORB BRISK and AKAZE descriptors \n"
         "Usage: \n"
-        "  ./keypoint_matching --tmp data/choco/template.png --input data/choco/data0.png --best_match_size=50 --use_color --use_rect --time\n"
+        "  ./matchmethod_orb_akaze_brisk --image1=<image1(../data/basketball1.png as default)> --image2=<image2(../data/basketball2.png as default)>\n"
         "Press a key when image window is active to change algorithm or descriptor\n";
 }
 
