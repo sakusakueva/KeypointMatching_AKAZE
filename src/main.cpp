@@ -5,7 +5,6 @@
 
 static void help();
 void CornerSort( std::vector<cv::Point2f> &corners, cv::Size img_in_size);
-void ResizeCorner( std::vector<cv::Point2f> &corners, cv::Size img_tmp_size, cv::Size img_in_size);
 cv::Mat DrawLines(const cv::Mat img, std::vector<cv::Point2f> corners, bool use_color);
 bool JudgeSuccess(const std::pair<int, int> &pred, const std::pair<int, int> &GT, const int eps);
 std::vector<cv::Point2f> CornerTrans(cv::Size img_tmp_size, cv::Mat h);
@@ -168,69 +167,6 @@ void CornerSort( std::vector<cv::Point2f> &corners, cv::Size img_in_size){
         if(corners[i].y > img_in_size.height) corners[i].y = img_in_size.height-1 ;
     }
     return;
-}
-
-// Set the size of the target after the projective transformation to be the same as the template image size.
-void ResizeCorner( std::vector<cv::Point2f> &corners, cv::Size img_tmp_size, cv::Size img_in_size){
-
-	int src_w, src_h, dst_w, dst_h, delta;
-	src_w = corners[1].x - corners[0].x ;
-	src_h = corners[3].y - corners[0].y ;
-    dst_w = img_tmp_size.width;
-    dst_h = img_tmp_size.height;
-	
-    if( src_w > dst_w ){
-        delta = ( src_w - dst_w )/2.0;
-	corners[0].x = corners[0].x + delta;
-	corners[1].x = corners[1].x - delta;
-	corners[2].x = corners[2].x - delta ;
-	corners[3].x = corners[3].x + delta ;
-    }else{
-        delta = ( dst_w - src_w )/2.0;
-	corners[0].x = corners[0].x - delta;
-	corners[1].x = corners[1].x + delta;
-	corners[2].x = corners[2].x + delta;
-	corners[3].x = corners[3].x - delta;
-    }
-
-    if( src_h > dst_h ){
-        delta = ( src_h - dst_h )/2.0;
-	corners[0].y = corners[0].y + delta;
-	corners[2].y = corners[2].y - delta;
-	corners[1].y = corners[1].y + delta;
-	corners[3].y = corners[3].y - delta;
-    }else{
-        delta = ( dst_h - src_h )/2.0;
-	corners[0].y = corners[0].y - delta;
-	corners[1].y = corners[1].y - delta;
-	corners[2].y = corners[2].y + delta;
-	corners[3].y = corners[3].y + delta;
-    }
-
-    for(int i = 0; i < 4; i++){
-        if(corners[i].x < 0) corners[i].x = 0 ;
-        if(corners[i].y < 0) corners[i].y = 0 ;
-        if(corners[i].x > img_in_size.width)  corners[i].x = img_in_size.width-1 ;
-        if(corners[i].y > img_in_size.height) corners[i].y = img_in_size.height-1 ;
-    }
-
-    return;
-}
-
-cv::Mat DrawLines(const cv::Mat img, std::vector<cv::Point2f> corners, bool use_color){
-    cv::Mat img_dst = img.clone();
-    if(use_color){
-        cv::line(img_dst, corners[0], corners[1], cv::Scalar(255, 255, 0), 4);
-        cv::line(img_dst, corners[1], corners[2], cv::Scalar(255, 255, 0), 4);
-        cv::line(img_dst, corners[2], corners[3], cv::Scalar(255, 255, 0), 4);
-        cv::line(img_dst, corners[3], corners[0], cv::Scalar(255, 255, 0), 4);        
-    }else{
-        cv::line(img_dst, corners[0], corners[1], cv::Scalar(128), 4);
-        cv::line(img_dst, corners[1], corners[2], cv::Scalar(128), 4);
-        cv::line(img_dst, corners[2], corners[3], cv::Scalar(128), 4);
-        cv::line(img_dst, corners[3], corners[0], cv::Scalar(128), 4);        
-    }
-    return img_dst;
 }
 
 bool JudgeSuccess(const std::pair<int, int> &pred, const std::pair<int, int> &GT, const int eps){
