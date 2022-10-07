@@ -6,7 +6,12 @@ OpenCVライブラリを使用してAKAZEを実行します．<br>
 OS：`Ubuntu 20.04`<br>
 OpenCV：`3.4.3`
 
-## コンパイル
+## 事前準備
+~~~
+$ git clone https://github.com/sakusakueva/KeypointMatching_AKAZE
+$ cd KeypointMatching_AKAZE
+~~~
+
 `KeypointMatching_AKAZE`直下で以下のコマンドを実行する．<br>
 ~~~
 $ mkdir build
