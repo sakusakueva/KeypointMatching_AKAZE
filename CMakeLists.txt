@@ -10,7 +10,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 # Set compiler options
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -Wall")  # For release
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fsanitize=address -fno-omit-frame-pointer -g -Wall")  # For debug
-set(CXX_LIBRARIES "stdc++fs")
+#set(CXX_LIBRARIES "stdc++fs")
 if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8)
     set(CMAKE_CXX_COMPILER "g++-8")
 endif ()
