@@ -43,6 +43,8 @@ $ ./keypoint_matching -tmp data/choco/template.png -input data/choco/data0.png -
 
 なお，正解位置が分かる場合は，`JudgeSuccess()`関数から，検出成功か判定することができます．<br>
 
+AKAZEのプログラムの詳細は，[こちら](https://docs.opencv.org/3.4/d8/d30/classcv_1_1AKAZE.html)を参照してください．
+
 ### 実行結果の描画
 #### (1) 検出結果を射影変換で描画する（`--use_project`）
 ![projection_trans](docs/projection_trans.png)
