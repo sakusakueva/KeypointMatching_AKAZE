@@ -101,8 +101,8 @@ int main(int argc, char *argv[]){
     
     /*=================================================================*/
     if(use_time_stamp){
-		end = std::chrono::system_clock::now();
-		msec = (double)std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() * 0.001;
+	end = std::chrono::system_clock::now();
+	msec = (double)std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() * 0.001;
         std::cout << "Time: " << msec << "[ms]\n";
     }
     /*=================================================================*/
@@ -145,28 +145,28 @@ static void help(){
 
 void CornerSort( std::vector<cv::Point2f> &corners, cv::Size img_in_size){
 
-	int i;
+    int i;
     int max_x, max_y, min_x, min_y;
-	max_x = min_x = corners[0].x ;
-	max_y = min_y = corners[0].y ;
-	for(i = 1;i < 4;i++){
-		if( max_x < corners[i].x) max_x = corners[i].x;
-		if( max_y < corners[i].y) max_y = corners[i].y;
-		if( min_x > corners[i].x) min_x = corners[i].x;
-		if( min_y > corners[i].y) min_y = corners[i].y;
-	}
+    max_x = min_x = corners[0].x ;
+    max_y = min_y = corners[0].y ;
+    for(i = 1;i < 4;i++){
+	if( max_x < corners[i].x) max_x = corners[i].x;
+	if( max_y < corners[i].y) max_y = corners[i].y;
+	if( min_x > corners[i].x) min_x = corners[i].x;
+	if( min_y > corners[i].y) min_y = corners[i].y;
+    }
 
-	corners[0] = cv::Point2f(min_x, min_y);
-	corners[1] = cv::Point2f(max_x, min_y);
-	corners[2] = cv::Point2f(max_x, max_y);
-	corners[3] = cv::Point2f(min_x, max_y);
+    corners[0] = cv::Point2f(min_x, min_y);
+    corners[1] = cv::Point2f(max_x, min_y);
+    corners[2] = cv::Point2f(max_x, max_y);
+    corners[3] = cv::Point2f(min_x, max_y);
 
     for(int i = 0; i < 4; i++){
         if(corners[i].x < 0) corners[i].x = 0 ;
         if(corners[i].y < 0) corners[i].y = 0 ;
         if(corners[i].x > img_in_size.width)  corners[i].x = img_in_size.width-1 ;
         if(corners[i].y > img_in_size.height) corners[i].y = img_in_size.height-1 ;
-	}
+    }
     return;
 }
 
@@ -181,38 +181,38 @@ void ResizeCorner( std::vector<cv::Point2f> &corners, cv::Size img_tmp_size, cv:
 	
     if( src_w > dst_w ){
         delta = ( src_w - dst_w )/2.0;
-		corners[0].x = corners[0].x + delta;
-		corners[1].x = corners[1].x - delta;
-		corners[2].x = corners[2].x - delta ;
-		corners[3].x = corners[3].x + delta ;
-	}else{
+	corners[0].x = corners[0].x + delta;
+	corners[1].x = corners[1].x - delta;
+	corners[2].x = corners[2].x - delta ;
+	corners[3].x = corners[3].x + delta ;
+    }else{
         delta = ( dst_w - src_w )/2.0;
-		corners[0].x = corners[0].x - delta;
-		corners[1].x = corners[1].x + delta;
-		corners[2].x = corners[2].x + delta;
-		corners[3].x = corners[3].x - delta;
-	}
+	corners[0].x = corners[0].x - delta;
+	corners[1].x = corners[1].x + delta;
+	corners[2].x = corners[2].x + delta;
+	corners[3].x = corners[3].x - delta;
+    }
 
-	if( src_h > dst_h ){
+    if( src_h > dst_h ){
         delta = ( src_h - dst_h )/2.0;
-		corners[0].y = corners[0].y + delta;
-		corners[2].y = corners[2].y - delta;
-		corners[1].y = corners[1].y + delta;
-		corners[3].y = corners[3].y - delta;
-	}else{
+	corners[0].y = corners[0].y + delta;
+	corners[2].y = corners[2].y - delta;
+	corners[1].y = corners[1].y + delta;
+	corners[3].y = corners[3].y - delta;
+    }else{
         delta = ( dst_h - src_h )/2.0;
-		corners[0].y = corners[0].y - delta;
-		corners[1].y = corners[1].y - delta;
-		corners[2].y = corners[2].y + delta;
-		corners[3].y = corners[3].y + delta;
-	}
+	corners[0].y = corners[0].y - delta;
+	corners[1].y = corners[1].y - delta;
+	corners[2].y = corners[2].y + delta;
+	corners[3].y = corners[3].y + delta;
+    }
 
     for(int i = 0; i < 4; i++){
         if(corners[i].x < 0) corners[i].x = 0 ;
         if(corners[i].y < 0) corners[i].y = 0 ;
         if(corners[i].x > img_in_size.width)  corners[i].x = img_in_size.width-1 ;
         if(corners[i].y > img_in_size.height) corners[i].y = img_in_size.height-1 ;
-	}
+    }
 
     return;
 }
@@ -272,7 +272,6 @@ void OutputProjectionTrans(const cv::Mat img_tmp, const cv::Mat img_in, cv::Mat 
 
 void OutputRect(std::vector<cv::Point2f> dst_corners, cv::Size img_tmp_size, cv::Mat img_in, bool use_color){
     CornerSort(dst_corners, cv::Size(img_in.cols, img_in.rows));
-	//ResizeCorner(dst_corners, cv::Size(img_tmp_size.width, img_tmp_size.height), cv::Size(img_in.cols, img_in.rows));
     cv::Mat result_match_line = DrawLines(img_in, dst_corners, use_color);
     cv::imshow("result_rect", result_match_line);
     return;
