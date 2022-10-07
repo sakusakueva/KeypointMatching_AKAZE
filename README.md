@@ -8,7 +8,7 @@ OpenCV：`3.4.3`
 
 ## 事前準備
 ~~~
-$ git clone https://github.com/sakusakueva/KeypointMatching_AKAZE
+$ git clone https://github.com/sakusakueva/KeypointMatching_AKAZE.git
 $ cd KeypointMatching_AKAZE
 ~~~
 
