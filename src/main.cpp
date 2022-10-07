@@ -48,12 +48,12 @@ int main(int argc, char *argv[]){
     use_inlier = parser.has("use_inlier");
 
     /*=================================================================*/
-    cv::Mat img_tmp = imread(parser.get<cv::String>("@tmp"), use_color);
+    cv::Mat img_tmp = cv::imread(parser.get<cv::String>("@tmp"), use_color);
     if (img_tmp.empty()){
         std::cout << "Image " << parser.get<cv::String>("@tmp") << " is empty or cannot be found\n";
         return 0;
     }
-    cv::Mat img_in = imread(parser.get<cv::String>("@input"), use_color);
+    cv::Mat img_in = cv::imread(parser.get<cv::String>("@input"), use_color);
     if (img_in.empty()){
         std::cout << "Image " << parser.get<cv::String>("@input") << " is empty or cannot be found\n";
         return 0;
