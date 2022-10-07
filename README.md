@@ -43,7 +43,7 @@ $ ./keypoint_matching -tmp data/choco/template.png -input data/choco/data0.png -
 
 のステップに分かれており，1. キーポイント検出，2. 特徴量記述は一つの関数`detectAndCompute()`で処理することもできます．<br>
 
-キーポイント検出後，特徴量の類似度をもとにキーポイントをソートし，上位`best_match_size`個のキーポイントを使ってRANSACを使ってホモグラフィ行列を算出します．<br>
+キーポイント検出後，特徴量の類似度をもとにキーポイントをソートし，上位`best_match_size`個のキーポイントを使いホモグラフィ行列を算出します．（RANSAC使用）<br>
 ホモグラフィ行列を使って射影変換し対象物の位置を求めます．<br>
 
 なお，正解位置が分かる場合は，`JudgeSuccess()`関数から，検出成功か判定することができます．<br>
