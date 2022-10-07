@@ -29,6 +29,19 @@ $ ./keypoint_matching -tmp data/choco/template.png -input data/choco/data0.png -
 
 ## プログラムの解説
 ### 処理の流れ
+![program](docs/program.png)
+
+キーポイントマッチングは，
+1. キーポイント検出 `detect()`
+1. 特徴量記述 `compute()`
+1. マッチング `match()`
+
+のステップに分かれており，1. キーポイント検出，2. 特徴量記述は一つの関数`detectAndCompute()`で処理することもできます．<br>
+
+キーポイント検出後，特徴量の類似度をもとにキーポイントをソートし，上位`best_match_size`個のキーポイントを使ってRANSACを使ってホモグラフィ行列を算出します．<br>
+ホモグラフィ行列を使って射影変換し対象物の位置を求めます．<br>
+
+なお，正解位置が分かる場合は，`JudgeSuccess`関数から，検出成功か判定することができます．<br>
 
 ### 実行結果の描画
 #### (1) 検出結果を射影変換で描画する（`--use_project`）
