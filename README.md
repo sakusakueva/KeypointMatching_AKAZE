@@ -12,7 +12,7 @@ $ git clone https://github.com/sakusakueva/KeypointMatching_AKAZE.git
 $ cd KeypointMatching_AKAZE
 ~~~
 
-`KeypointMatching_AKAZE`直下で以下のコマンドを実行する．<br>
+`KeypointMatching_AKAZE`直下で以下のコマンドを実行してコンパイルする．<br>
 ~~~
 $ mkdir build
 $ cd build
@@ -33,7 +33,7 @@ $ ./keypoint_matching -tmp data/choco/template.png -input data/choco/data0.png -
 ~~~
 
 ## プログラムの解説
-### 処理の流れ
+### 1. 処理の流れ
 ![program](docs/program.png)
 
 キーポイントマッチングは，
@@ -50,7 +50,7 @@ $ ./keypoint_matching -tmp data/choco/template.png -input data/choco/data0.png -
 
 AKAZEのプログラムの詳細は，[こちら](https://docs.opencv.org/3.4/d8/d30/classcv_1_1AKAZE.html)を参照してください．
 
-### 実行結果の描画
+### 2. 実行結果の描画
 #### (1) 検出結果を射影変換で描画する（`--use_project`）
 ![projection_trans](docs/projection_trans.png)
 
