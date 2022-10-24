@@ -66,7 +66,7 @@ int main(int argc, char *argv[]){
     /*=================================================================*/
     // AKAZE
     cv::Ptr<cv::Feature2D> akaze = cv::AKAZE::create();
-    cv::Ptr<cv::DescriptorMatcher> descriptorMatcher = cv::DescriptorMatcher::create("BruteForce");
+    cv::Ptr<cv::DescriptorMatcher> descriptorMatcher = cv::DescriptorMatcher::create("BruteForce-Hamming");
     std::vector<cv::KeyPoint> keyImg_tmp, keyImg_in; // keypoint  for img1 and img2
     cv::Mat descImg_tmp, descImg_in; // Descriptor for img1 and img2
     std::vector<cv::DMatch> matches; // Match between img1 and img2
